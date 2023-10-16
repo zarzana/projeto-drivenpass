@@ -26,8 +26,9 @@ async function findCredential(credentialId: number, userId: number) {
 };
 
 async function deleteCredential(credentialId: number, userId: number) {
-    if (!findCredential(credentialId, userId)) throw credentialNotFoundError;
-    return prisma.credential.delete({ where: { id: credentialId, userId } });
+    const credential = await findCredential(credentialId, userId);
+    if (!credential) { throw credentialNotFoundError() }
+    else { return prisma.credential.delete({ where: { id: credentialId, userId } }) };
 };
 
 export const credentialRepository = {

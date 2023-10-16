@@ -97,7 +97,7 @@ describe('POST /users/signin', () => {
 
         const generateValidBody = () => ({
             email: faker.internet.email(),
-            password: faker.internet.password(6),
+            password: faker.internet.password({length: 6}),
         });
 
         describe('when credentials are invalid', () => {
