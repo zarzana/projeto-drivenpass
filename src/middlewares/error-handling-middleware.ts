@@ -10,6 +10,12 @@ export function handleApplicationErrors(err: ApplicationError | Error, _req: Req
         });
     };
 
+    if (err.name === 'InvalidCredentialsError' || err.name === 'JsonWebTokenError') {
+        return res.status(httpStatus.UNAUTHORIZED).send({
+            message: err.message,
+        });
+    }
+
     if (err.name === 'InvalidDataError') {
         return res.status(httpStatus.BAD_REQUEST).send({
             message: err.message,
