@@ -1,7 +1,7 @@
 import 'express-async-errors';
 import express, { Express } from 'express';
 import { handleApplicationErrors } from './middlewares';
-import { usersRouter } from './routers';
+import { usersRouter, credentialsRouter } from './routers';
 import { loadEnv, connectDb, disconnectDB } from './config';
 
 loadEnv();
@@ -10,6 +10,7 @@ const app = express();
 app
     .use(express.json())
     .use('/users', usersRouter)
+    .use('/credentials', credentialsRouter)
     .use(handleApplicationErrors);
 
 export function init(): Promise<Express> {
