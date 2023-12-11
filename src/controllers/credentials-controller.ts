@@ -4,8 +4,8 @@ import { AuthenticatedRequest } from '../middlewares';
 import { credentialService } from '../services';
 
 export async function credentialPost(req: AuthenticatedRequest, res: Response) {
-    const { title, url, username, password } = req.body;
-    await credentialService.createCredential(title, url, username, password, req.userId);
+    const credentialInfo = req.body;
+    await credentialService.createCredential(credentialInfo, req.userId);
     return res.sendStatus(httpStatus.CREATED);
 };
 

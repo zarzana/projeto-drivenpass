@@ -3,7 +3,8 @@ import { Credential } from "@prisma/client";
 import { credentialNotFoundError, duplicatedCredentialNameError } from '../errors';
 import { credentialRepository } from '../repositories';
 
-export async function createCredential(title: string, url: string, username: string, password: string, userId: number): Promise<void> {
+export async function createCredential(credentialInfo: CredentialParams, userId: number): Promise<void> {
+    const { title, url, username, password } = credentialInfo;
     await validateUniqueNameOrFail(title, userId);
     const cryptr = new Cryptr(process.env.CRYPTR_SECRET);
     const encryptedPassword = cryptr.encrypt(password);
