@@ -1,11 +1,10 @@
 import { faker } from '@faker-js/faker';
 import httpStatus from 'http-status';
 import supertest from 'supertest';
-import { createSession, createUser } from '../factories';
+import { createUser } from '../factories';
 import { cleanDb, generateValidToken } from '../helpers';
-import { duplicatedCredentialNameError, duplicatedEmailError } from '../../src/errors';
+import { duplicatedCredentialNameError } from '../../src/errors';
 import app, { init } from '../../src/app';
-import { prisma } from '../../src/config';
 import * as jwt from 'jsonwebtoken';
 
 beforeAll(async () => { await init() });
