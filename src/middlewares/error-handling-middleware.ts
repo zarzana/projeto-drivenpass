@@ -8,19 +8,19 @@ export function handleApplicationErrors(err: ApplicationError | Error, _req: Req
         return res.status(httpStatus.NOT_FOUND).send({
             message: err.message,
         });
-    };
+    }
 
     if (err.name === 'DuplicatedCredentialNameError') {
         return res.status(httpStatus.CONFLICT).send({
             message: err.message,
         });
-    };
+    }
 
     if (err.name === 'DuplicatedEmailError') {
         return res.status(httpStatus.CONFLICT).send({
             message: err.message,
         });
-    };
+    }
 
     if (err.name === 'InvalidCredentialsError' || err.name === 'JsonWebTokenError') {
         return res.status(httpStatus.UNAUTHORIZED).send({
@@ -32,7 +32,7 @@ export function handleApplicationErrors(err: ApplicationError | Error, _req: Req
         return res.status(httpStatus.BAD_REQUEST).send({
             message: err.message,
         });
-    };
+    }
 
     if (err.name === 'UnauthorizedError') {
         return res.status(httpStatus.UNAUTHORIZED).send({
@@ -46,5 +46,7 @@ export function handleApplicationErrors(err: ApplicationError | Error, _req: Req
         error: 'InternalServerError',
         message: 'Internal Server Error',
     });
+
+    next();
+
 }
-;

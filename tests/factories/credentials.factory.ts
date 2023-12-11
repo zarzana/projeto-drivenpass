@@ -18,4 +18,4 @@ export async function createCredential(params: Partial<Credential> = {}): Promis
             userId: user.id,
         },
     });
-};
+}

@@ -5,4 +5,4 @@ export function duplicatedEmailError(): ApplicationError {
     name: 'DuplicatedEmailError',
     message: 'A user with this email already exists.',
   };
-};
+}

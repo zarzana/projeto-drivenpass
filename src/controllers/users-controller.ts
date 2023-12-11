@@ -9,10 +9,10 @@ export async function signUpPost(req: Request, res: Response) {
     id: user.id,
     email: user.email,
   });
-};
+}
 
 export async function singInPost(req: Request, res: Response) {
   const { email, password } = req.body as SignInParams;
   const result = await userService.signIn({ email, password });
   return res.status(httpStatus.OK).send(result);
-};
+}

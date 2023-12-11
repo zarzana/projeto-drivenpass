@@ -15,23 +15,23 @@ export async function createCredential(credentialInfo: CredentialParams, userId:
         password: encryptedPassword,
         userId,
     });
-};
+}
 
 async function validateUniqueNameOrFail(title: string, userId: number) {
     const credentialWithSameNameFromUser = await credentialRepository.findByNameAndUser(title, userId);
     if (credentialWithSameNameFromUser) {
         throw duplicatedCredentialNameError();
     }
-};
+}
 
 async function findAllUserCredentials(userId: number) {
     const cryptr = new Cryptr(process.env.CRYPTR_SECRET);
     const credentialArray = await credentialRepository.findAllUserCredentials(userId);
     for (let i = 0; i < credentialArray.length; i++) {
         credentialArray[i].password = cryptr.decrypt(credentialArray[i].password);
-    };
+    }
     return credentialArray;
-};
+}
 
 async function findCredential(credentialId: number, userId: number) {
     const cryptr = new Cryptr(process.env.CRYPTR_SECRET);
@@ -39,11 +39,11 @@ async function findCredential(credentialId: number, userId: number) {
     if (!credential) throw credentialNotFoundError();
     credential.password = cryptr.decrypt(credential.password);
     return credential;
-};
+}
 
 async function deleteCredential(credentialId: number, userId: number) {
     await credentialRepository.deleteCredential(credentialId, userId);
-};
+}
 
 export type CredentialParams = Omit<Credential, 'id' | 'userId'>;
 

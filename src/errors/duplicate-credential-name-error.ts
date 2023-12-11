@@ -5,4 +5,4 @@ export function duplicatedCredentialNameError(): ApplicationError {
     name: 'DuplicatedCredentialNameError',
     message: 'You already have a credential with that name.',
   };
-};
+}
